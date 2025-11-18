@@ -1,4 +1,5 @@
 import { cloneElement, useState } from "react";
+import Button from "./components/Button";
 
 
 
@@ -85,14 +86,11 @@ function App() {
 
         {/* Buttons */}
         <div className="grid grid-cols-4 gap-3">
-          {buttons.map((btn, index) => (
-            <button
-              key={index}
-              onClick={() => handleClick(btn)}
-              className="bg-gray-700 hover:bg-gray-600 active:bg-gray-500 transition p-4 text-xl rounded-lg text-white"
-            >
-              {btn}
-            </button>
+          {buttons.map((title, index) => (
+            <Button
+            key={index}
+            title={title}
+            onClick={() => handleClick(title)}/>
           ))}
         </div>
       </div>
