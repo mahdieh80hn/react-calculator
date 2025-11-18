@@ -1,5 +1,6 @@
 import { cloneElement, useState } from "react";
 import Button from "./components/Button";
+import Display from "./components/Display";
 
 
 
@@ -80,9 +81,7 @@ function App() {
       <div className="bg-gray-800 p-4 rounded-xl w-80">
 
         {/* Display */}
-        <div className="bg-black text-white text-right text-3xl p-4 rounded-lg mb-4 h-16 flex items-center justify-end">
-          {currentInput || previousInput || "0"}
-        </div>
+        {<Display currentInput={currentInput} previousInput={previousInput} operator={operator}/>}
 
         {/* Buttons */}
         <div className="grid grid-cols-4 gap-3">

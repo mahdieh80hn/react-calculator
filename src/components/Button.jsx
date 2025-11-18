@@ -1,4 +1,4 @@
-function Button({ title, onClick }){
+export default function Button({ title, onClick }){
     return (
             <button
               onClick={ onClick }
@@ -8,5 +8,3 @@ function Button({ title, onClick }){
             </button>
     )
 }
-
-export default Button;
