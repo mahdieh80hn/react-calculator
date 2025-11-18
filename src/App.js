@@ -1,6 +1,8 @@
-import { cloneElement, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Display from "./components/Display";
+import ThemeToggle from "./components/ThemeToggle";
+import Header from "./components/layouts/Header";
 
 
 
@@ -9,6 +11,7 @@ function App() {
   const [currentInput, setCurrentInput] = useState("")
   const [previousInput, setPreviousInput] = useState("")
   const [operator, setOperator] = useState(null)
+  const [isDark, setIsDark] = useState(true)
 
   const buttons = [
     "C", "/", "*", "Del",
@@ -17,6 +20,16 @@ function App() {
     "1", "2", "3", "=",
     "0", ".",
   ];
+
+  // save theme in local storage
+  useEffect(() => {
+    const saved = localStorage.getItem("calc-theme")
+    if (saved) setIsDark(saved === "dark")
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("calc-theme", isDark ? "dark" : "light")
+  }, [isDark])
 
   const handleClick = (value) => {
     if (value === "C") {
@@ -31,7 +44,7 @@ function App() {
       return
     }
 
-    if(!isNaN(value) || value === "."){
+    if (!isNaN(value) || value === ".") {
       setCurrentInput(currentInput + value)
       return
     }
@@ -47,15 +60,15 @@ function App() {
 
 
     // calculation
-    if(value === "="){
-      if(!operator || currentInput === "") return
+    if (value === "=") {
+      if (!operator || currentInput === "") return
 
       const prev = parseFloat(previousInput)
       const curr = parseFloat(currentInput)
 
       let result = 0
 
-      switch (operator){
+      switch (operator) {
         case "+":
           result = prev + curr
           break;
@@ -77,19 +90,20 @@ function App() {
     }
   }
   return (
-    <div className="w-full h-screen bg-gray-900 flex items-center justify-center">
-      <div className="bg-gray-800 p-4 rounded-xl w-80">
-
-        {/* Display */}
-        {<Display currentInput={currentInput} previousInput={previousInput} operator={operator}/>}
+    <div className={`${isDark ? "bg-gray-900 text-white" : "bg-white text-gray-900"} min-h-screen flex flex-col items-center justify-center p-4`}>
+      <Header/>
+      <div className={`${isDark ? "bg-gray-800" : "bg-gray-100"} p-4 rounded-xl w-80 shadow-xl`}>
+        <ThemeToggle isDark={isDark} toggle={() => setIsDark(t => !t)}/>
+        {/* Display */} 
+        {<Display currentInput={currentInput} previousInput={previousInput} operator={operator} />}
 
         {/* Buttons */}
         <div className="grid grid-cols-4 gap-3">
           {buttons.map((title, index) => (
             <Button
-            key={index}
-            title={title}
-            onClick={() => handleClick(title)}/>
+              key={index}
+              title={title}
+              onClick={() => handleClick(title)} />
           ))}
         </div>
       </div>
