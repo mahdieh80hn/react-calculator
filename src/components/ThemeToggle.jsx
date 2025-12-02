@@ -1,10 +1,10 @@
-export default function ThemeToggle({ isDark, toggle }) {
+export default function ThemeToggle({ theme, toggleTheme }) {
   return (
     <button
-      onClick={toggle}
-      className="mb-3 px-3 py-1 rounded-lg bg-gray-200 dark:bg-gray-700 text-sm"
+      onClick={toggleTheme}
+      className="px-4 py-2 rounded-lg bg-gray-600 text-white"
     >
-      {isDark ? "Dark" : "Light"}
+      {theme === "light" ? "Dark Mode" : "Light Mode"}
     </button>
   );
 }
