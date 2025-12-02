@@ -1,0 +1,73 @@
+import { useState } from "react"
+
+export default function useCalculator() {
+    const [currentInput, setCurrentInput] = useState("")
+    const [previousInput, setPreviousInput] = useState("")
+    const [operator, setOperator] = useState(null)
+
+    const handleClick = (value) => {
+        if (value === "C") {
+            setCurrentInput("")
+            setPreviousInput("")
+            setOperator(null)
+            return
+        }
+
+        if (value === "Del") {
+            setCurrentInput(currentInput.slice(0, -1))
+            return
+        }
+
+        if (!isNaN(value) || value === ".") {
+            setCurrentInput(currentInput + value)
+            return
+        }
+
+        if (["+", "-", "*", "/"].includes(value)) {
+            if (currentInput === "") return
+
+            setOperator(value)
+            setPreviousInput(currentInput)
+            setCurrentInput("")
+            return
+        }
+
+
+        // calculation
+        if (value === "=") {
+            if (!operator || currentInput === "") return
+
+            const prev = parseFloat(previousInput)
+            const curr = parseFloat(currentInput)
+
+            let result = 0
+
+            switch (operator) {
+                case "+":
+                    result = prev + curr
+                    break;
+                case "-":
+                    result = prev - curr
+                    break;
+                case "*":
+                    result = prev * curr
+                    break;
+                case "/":
+                    result = prev / curr
+                    break;
+                default:
+                    break;
+            }
+            setCurrentInput(String(result))
+            setPreviousInput("")
+            setOperator(null)
+        }
+    }
+
+    return {
+        currentInput,
+        previousInput,
+        operator,
+        handleClick
+    }
+}

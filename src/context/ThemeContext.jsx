@@ -6,7 +6,7 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("light");
 
   // Load theme from localStorage on first render
-    useEffect(() => {
+  useEffect(() => {
     const saved = localStorage.getItem("calc-theme");
 
     if (saved === "dark") {
