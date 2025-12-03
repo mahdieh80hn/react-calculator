@@ -35,6 +35,32 @@ export default function useCalculator() {
             return
         }
 
+        // percent
+
+        if(value === "%"){
+            if(currentInput === "") return
+
+            const curr = parseFloat(currentInput)
+
+            if(!operator){
+                setCurrentInput(String(curr / 100))
+                return
+            }
+
+            const prev = parseFloat(previousInput)
+            let percentValue = curr
+
+            if(operator === "+" || operator === "-"){
+                percentValue = (prev * curr) / 100
+            }
+
+            if(operator === "*" || operator === "/"){
+                percentValue = curr / 100
+            }
+            setCurrentInput(String(percentValue))
+            return
+        }
+
 
         // calculation
         if (value === "=") {

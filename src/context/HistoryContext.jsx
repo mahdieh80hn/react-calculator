@@ -8,11 +8,8 @@ export function HistoryProvider({ children }) {
     useEffect(() => {
 
         const saved = localStorage.getItem("calc-history")
-        console.log('saved', saved)
         if (saved) {
             setHistory(JSON.parse(saved))
-
-            console.log('saved2', saved)
         }
         setLoaded(true)
 
@@ -21,7 +18,7 @@ export function HistoryProvider({ children }) {
     useEffect(() => {
         if(loaded){
             localStorage.setItem("calc-history", JSON.stringify(history))
-        }
+        } 
     }, [history, loaded])
 
     const addHistory = (item) => {
