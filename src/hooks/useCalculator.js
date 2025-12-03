@@ -1,9 +1,12 @@
 import { useState } from "react"
+import { useHistoryCalc } from "../context/HistoryContext"
 
 export default function useCalculator() {
     const [currentInput, setCurrentInput] = useState("")
     const [previousInput, setPreviousInput] = useState("")
     const [operator, setOperator] = useState(null)
+
+    const { addHistory } = useHistoryCalc()
 
     const handleClick = (value) => {
         if (value === "C") {
@@ -58,6 +61,10 @@ export default function useCalculator() {
                 default:
                     break;
             }
+            addHistory({
+                expression: `${prev} ${operator} ${curr}`,
+                result,
+            });
             setCurrentInput(String(result))
             setPreviousInput("")
             setOperator(null)
