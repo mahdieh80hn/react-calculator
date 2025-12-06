@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useHistoryCalc } from "../context/HistoryContext"
 
 export default function useCalculator() {
@@ -109,6 +109,42 @@ export default function useCalculator() {
             setOperator(null)
         }
     }
+
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            const key = e.key
+
+            if (!isNaN(key) || key === ".") {
+                handleClick(key)
+            }
+
+            if (["+", "-", "*", "/"].includes(key)) {
+                handleClick(key)
+            }
+
+            if (key === "Enter") {
+                e.preventDefault()
+                handleClick("=")
+            }
+
+            if (key === "Backspace") {
+                handleClick("Del")
+            }
+
+            if (key === "Escape") {
+                handleClick("C")
+            }
+
+            if (key === "%") {
+                handleClick("%")
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyPress)
+        return () => {
+            window.removeEventListener("keydown", handleKeyPress)
+        }
+    }, [currentInput, previousInput, operator])
 
     return {
         currentInput,
