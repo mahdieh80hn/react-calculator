@@ -1,6 +1,6 @@
 import ButtonsPanel from "./ButtonsPanel";
 import { useTheme } from "../../context/ThemeContext";
-import useCalculator from "../../hooks/useCalculator";
+import useCalculator from "../../hooks/calculator/useCalculator";
 import Display from "../Display";
 
 export default function Calculator() {
