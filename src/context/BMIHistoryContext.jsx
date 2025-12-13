@@ -18,6 +18,9 @@ export default function BMIHistoryProvider({children}) {
             bmi: Number(bmi)
         }
         setBmiHistory((prev) => [...prev, record])
+        console.log("record", record);
+        console.log("bmi", bmi)
+        
     }
   return (
     <BMIHistoryContext.Provider value={{ bmiHistory, addBMIRecord}}>

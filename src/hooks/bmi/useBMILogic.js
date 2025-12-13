@@ -31,7 +31,7 @@ export default function useBMILogic({
         else s = "Obese"
 
         setStatus(s)
-        addBMIRecord(bmi)
+        addBMIRecord(rounded)
     }
   return ({
     calculateBMI
