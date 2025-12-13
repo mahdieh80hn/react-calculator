@@ -6,7 +6,8 @@ export default function useBMILogic({
         setBmi,
         setHeight,
         setWeight,
-        setStatus
+        setStatus,
+        addBMIRecord
     }) {
     const calculateBMI = () => {
         const w = parseFloat(weight)
@@ -30,6 +31,7 @@ export default function useBMILogic({
         else s = "Obese"
 
         setStatus(s)
+        addBMIRecord(bmi)
     }
   return ({
     calculateBMI

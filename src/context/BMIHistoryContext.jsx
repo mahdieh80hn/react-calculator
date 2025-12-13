@@ -14,13 +14,13 @@ export default function BMIHistoryProvider({children}) {
     const addBMIRecord = (bmi) => {
         const record = {
             id: crypto.randomUUID,
-            date: new Date().toLocaleDateString,
+            date: new Date().toLocaleDateString(),
             bmi: Number(bmi)
         }
         setBmiHistory((prev) => [...prev, record])
     }
   return (
-    <BMIHistoryContext.Provider value={{history, addBMIRecord}}>
+    <BMIHistoryContext.Provider value={{ bmiHistory, addBMIRecord}}>
         {children}
     </BMIHistoryContext.Provider>
   )

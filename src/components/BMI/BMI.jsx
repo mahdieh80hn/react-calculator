@@ -1,9 +1,12 @@
 import useBMI from '../../hooks/bmi/useBMI'
+import BMIChart from './BMIChart'
 
 export default function BMI() {
-    const {weight, setWeight, height, setHeight, bmi, status, calculateBMI} = useBMI()
+    const { weight, setWeight, height, setHeight, bmi, status, calculateBMI } = useBMI()
     return (
-        <div><h1 className="text-2xl font-bold mb-4">BMI Calculator</h1>
+        <div className='flex gap-16 items-center justify-center w-full px-72'>
+            <div >
+            <h1 className="text-2xl font-bold mb-4">BMI Calculator</h1>
             <div className="flex flex-col gap-4">
                 <input
                     type="number"
@@ -38,6 +41,8 @@ export default function BMI() {
                     </div>
                 )}
             </div>
+        </div>
+            <BMIChart/>
         </div>
     )
 }
