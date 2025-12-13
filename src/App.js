@@ -1,16 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layouts/Layout";
 import CalculatorPage from "./pages/CalculatorPage";
+import BMIPage from "./pages/BMIPage";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<CalculatorPage />} />
+          <Route path="/bmi" element={<BMIPage />} />
         </Routes>
       </Layout>
-    </Router>
+    </BrowserRouter>
   );
 }
 export default App;
